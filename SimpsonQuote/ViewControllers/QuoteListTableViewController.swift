@@ -14,7 +14,13 @@ class QuoteListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        QuoteController.fetchCharacters { (quotes) in
+            guard let quotes = quotes else { return }
+            self.quotes = quotes
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -46,5 +52,4 @@ class QuoteListTableViewController: UITableViewController {
             destinationVC.quote = simpQuotes
         }
     }
-
 }

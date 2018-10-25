@@ -23,10 +23,13 @@ class QuoteController {
         let quoteQueryItem = URLQueryItem(name: "count", value: "10")
         components?.queryItems = [quoteQueryItem]
         
+        guard let url = components?.url else {completion(nil); return}
+        print(url)
+        
         //Step2 URL Request- Skip not needed
         
         //Step 3 - Datatask + RESUME
-        URLSession.shared.dataTask(with: baseURL) { (data, _, error) in
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
             if let error = error {
                 print("There was an error in \(#function) ; \(error) ; \(error.localizedDescription) ")
                 completion(nil); return

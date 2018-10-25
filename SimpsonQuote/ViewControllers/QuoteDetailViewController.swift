@@ -11,6 +11,7 @@ import UIKit
 class QuoteDetailViewController: UIViewController {
     
     @IBOutlet weak var characterImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var quoteLabel: UILabel!
     
     var quote: Quote?
@@ -18,7 +19,7 @@ class QuoteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateViews()
-        guard let quote = quote else { return}
+        guard let quote = quote else { return }
         QuoteController.fetchImage(with: quote) { (image) in
             DispatchQueue.main.async {
                 self.characterImageView.image = image
@@ -29,7 +30,8 @@ class QuoteDetailViewController: UIViewController {
     
     
     func updateViews() {
-        guard let quote = quote else { return}
+        guard let quote = quote else { return }
         quoteLabel.text = quote.quote
+        nameLabel.text = quote.name
     }
 }
